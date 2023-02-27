@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Sample</title>
+</head>
+<html>
+  <body>
+    <script>
+      const days = ["월요일", "화요일"];
+      myPrint(days);
+      days.push("수요일", "목요일", "금요일", "토요일", "일요일");
+      days.pop();
+      days.pop();
+      days.pop();
+      const days2 = ["금요일", "토요일", "일요일"];
+
+      let result = days.concat("aaa", days2);
+      myPrint(days);
+      myPrint(days.concat(days2));
+      myPrint(result);
+
+      const 휴일 = result.slice(6);
+      const 휴일1 = result.slice(1, 3); //첫번째꺼 빼고 세번째꺼까지
+      myPrint(휴일);
+      myPrint(휴일1);
+      myPrint(result); //  slice는 원본을 바꾸지 않고 보존된다
+
+      //splice는 원본이 보존되지 않는다
+
+      let nana = result.splice(3, 2); //두번째꺼 이후 부터 나눠진 값 , 3번째꺼 이후 부터 두개 값 :괄호안의것을 잘라내버리겠다
+      myPrint(result); //남은 값
+      myPrint(nana);
+
+      function myPrint(arr) {
+        const p = document.createElement("p");
+        p.style.color = "#fff";
+        p.style.fontWeight = "bold";
+        p.style.fontSize = "25px";
+        p.style.textAlign = "center";
+        document.body.style.backgroundColor = "yellowgreen";
+        p.innerHTML = arr;
+        console.log(p);
+        console.dir(p);
+
+        document.body.appendChild(p);
+      }
+
+      //----------------------맵과 필터---------------------------------------------------------------
+
+      const arr = [1, 2, 3, 4, 5];
+      //---------------------------------같음
+      //1번  const output = arr.map( a=> a+1);
+
+      //2번 const output = arr.map(function(a){
+      //     return a+1;
+      //      })
+      //     myPrint(output)
+
+      // 3번
+
+      function plus1(a) {
+        return a + 1;
+      }
+      const output = arr.map(plus1);
+      myPrint(output);
+
+      // --------------------------------------------
+
+      //arr에 곱하기 2 해서 새로운 값 만들기 3가지 방법 모두로
+
+      // 1번-------------------
+
+      const inin = arr.map((b) => b * 2);
+
+      myPrint(inin);
+
+      //2번-----------------------
+
+      const inin1 = arr.map(function (b) {
+        return b * 2;
+      });
+
+      myPrint(inin1);
+
+      //3번------------------------------
+
+      function plus2(b) {
+        return b * 2;
+      }
+
+      const inin2 = arr.map(plus2);
+
+      myPrint(inin2);
+
+      // -----------------------------------------------------------
+
+      //밸열안의 객체----------------------------------
+
+      const 객체배열 = [
+        { count: 1 },
+        { count: 2 },
+        { count: 3 },
+        { count: 4 },
+        { count: 5 },
+      ];
+
+      //1번 --------------------------------------------------------
+      const output1 = 객체배열.map((a) => a.count + 1);
+
+      myPrint(output1);
+
+      //2번 --------------------------------------------
+
+      const output2 = 객체배열.map(function (a) {
+        return a.count + 1;
+      });
+
+      myPrint(output2);
+
+      //3번 ----------------------------------------------
+
+      function pluseee(a) {
+        return a.count + 1;
+      }
+
+      const output3 = 객체배열.map(pluseee);
+
+      myPrint(output3);
+      // -------------------------------------------------------------------------
+
+      const 학생기록 = [
+        { name: "김", score: 80 },
+        { name: "이", score: 100 },
+        { name: "박", score: 70 },
+        { name: "최", score: 90 },
+        { name: "성", score: 60 },
+      ];
+
+      //---------------------------80점 이상인 애들 뽑기--------------
+
+      // 1번
+      // const tata = 학생기록.map((a) => (a.score >= 80 ? a.name : ""));
+      const tata = 학생기록.map((a) => {
+        if (a.score >= 80) {
+          return a.name;
+        }
+      });
+      myPrint(tata);
+
+      //2번
+
+      const tata1 = 학생기록.map(function (a) {
+        if (a.score >= 80) {
+          return a.name;
+        }
+
+        // return a.score >= 80;
+      });
+
+      myPrint(tata1);
+      console.log(tata1);
+
+      //3번
+
+      function ojojoo(a) {
+        if (a.score >= 80) {
+          return a.name;
+        }
+        // return a.score >= 80;
+      }
+
+      const tata2 = 학생기록.map(ojojoo);
+
+      myPrint(tata2);
+
+      // ---------------------필터-------------------------------
+
+      //1번
+      const tata4 = 학생기록.filter((a) => (a.score >= 80 ? a.name : ""));
+      // const tata4 = 학생기록.filter(a => {if(a.score >= 80){return a.name}});
+
+      console.log(tata4);
+      myPrint(tata4);
+
+      //2번
+
+      const tata3 = 학생기록.filter(function (a) {
+        if (a.score >= 80) {
+          return true;
+        }
+
+        // return a.score >= 80;
+      });
+
+      myPrint(tata3);
+
+      console.log(tata3);
+
+      //3번
+
+      function tyty(a) {
+        if (a.score >= 80) {
+          return a.name;
+        }
+      }
+
+      const tata5 = 학생기록.filter(tyty);
+
+      myPrint(tata5);
+      console.log(tata5);
+
+      //--------------------------스프레드 인덱스 오퍼레이터(...)------------------------------------------------------
+
+      // 쫙 펼친다
+      // ...는 대관호 안에서만 쓸수있다
+
+      const a = [1, 2, 3, 4, 5];
+      const b = [...a, 6, 7, 8, 9];
+      const c = [a, 6, 7, 8, 9];
+
+      myPrint(b);
+      console.log(b);
+      myPrint(c);
+      console.log(c);
+
+      // -------------------------값복사 참조복사----------------
+
+      let d = a; //이것은 참조복사
+
+      d = [...a]; //이것은 값복사
+
+      const 문자열 = "student";
+
+      myPrint(문자열[1]);
+      const output11 = [...문자열];
+      myPrint(output11);
+      console.log(output11);
+
+      //------------디스트럭처링 Destructuring (비구조와 , 파괴)
+
+      const arr1 = [4, 5, 6];
+      // const a1 = arr1[0]
+      // const b1 = arr1[1]
+      // const c1 = arr1[2]
+      const [a1, b1, c1] = arr1;
+      //이런방식으로 한줄로 쓰겠다 이것이 디스트럭처링
+
+      const [x, , z] = arr1;
+      console.log(x, z);
+
+      //--------------------------------------------------------
+
+      //  rest용법
+
+      const [x1, ...y1] = arr1; //rest
+      console.log(x1, y1);
+
+      //--------------------------------------------------------------
+
+      const obj = {
+        name: "smith",
+        age: 25,
+      };
+
+      //  원래는 객체를 이렇게 썻는데 이것을이렇게
+
+      const { name, age } = obj;
+      //  const{age , nam } = obj
+
+      //이거는 순서상관 없고 이름이 같아야함
+
+      console.log(name, age);
+    </script>
+  </body>
+</html>
