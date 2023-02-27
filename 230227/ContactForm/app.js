@@ -8,7 +8,7 @@ function onsub() {
   let message = document.getElementById("message").value;
 
   localStorage.setItem(name, email);
-  localStorage.setItem(name, message);
+  // localStorage.setItem(name, message);
 }
 
 function resetsub() {
