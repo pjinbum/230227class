@@ -12,6 +12,13 @@ const balloons = document.querySelectorAll(".balloon");
 // console.log(b)
 console.log(balloons);
 
+function everyCallback(elm) {
+  // (element) => {
+  //   console.log(element.style.backgroundColor);
+  //   element.style.backgroundColor === "rgb(237, 237, 237)";
+  // }
+}
+
 balloons.forEach((b) => {
   console.log(b);
   b.addEventListener("mouseover", function (e) {
@@ -20,12 +27,7 @@ balloons.forEach((b) => {
 
     console.log(b);
 
-    if (
-      balloons.every((element) => {
-        console.log(element.style.backgroundColor);
-        element.style.backgroundColor === "rgb(237, 237, 237)";
-      })
-    ) {
+    if (balloons.every(everyCallback)) {
       gallery.style.display = "none";
       message.style.display = "block";
     }
